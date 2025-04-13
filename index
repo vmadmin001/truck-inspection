@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SCHEDULE 1 — VM Trucking Academy 2024</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        h1, h2 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #333; padding: 8px; vertical-align: top; }
+        th { background-color: #f0f0f0; }
+        audio { width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>SCHEDULE 1 — National Safety Code Standard 13</h1>
+    <h2>DAILY INSPECTION OF TRUCKS, TRACTORS AND TRAILERS</h2>
+    <p><strong>Note:</strong> This document lists the components to be inspected, along with minor and major defect definitions.</p>
+
+    <table>
+        <tr>
+            <th>Systems and Components</th>
+            <th>Minor Defects</th>
+            <th>Major Defects</th>
+        </tr>
+        <tr>
+            <td>1. Air Brake System</td>
+            <td> </td>
+			<td> </td>
+         </tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A. Low Air
+        <audio controls>
+            <source src="audio/Lowair.mp3" type="audio/mp3">
+        </audio>
+    </td>
+    <td>A. No Minor Defect
+	<audio controls>
+            <source src="audio/Nominor.mp3" type="audio/mp3">
+        </audio>
+	</td>
+
+    <td>A. Low air warning system fails or system is activated
+        <audio controls>
+            <source src="audio/Lowairmajor.mp3" type="audio/mp3">
+        </audio>
+    </td>
+</tr>
+<tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B. Pressure Build-up.
+        <audio controls>
+            <source src="audio/Pressureb.mp3" type="audio/mp3">
+        </audio>
+    </td>
+    <td>B. slow air pressure build-up rate.
+        <audio controls>
+            <source src="audio/Pressurebminor.mp3" type="audio/mp3">
+        </audio>
+    </td>
+    <td>B. No Major Defect
+	    <audio controls>
+            <source src="audio/Nomajor.mp3" type="audio/mp3">
+        </audio>
+	</td>
+</tr>
+<tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C. Air Loss/Leak
+        <audio controls>
+            <source src="audio/Airloss.mp3" type="audio/mp3">
+        </audio>
+    </td>
+    <td>C. Audible air leak.
+        <audio controls>
+            <source src="audio/Airlossminor.mp3" type="audio/mp3">
+        </audio>
+    </td>
+    <td>C. Air loss rate exceeds prescribed limit.
+        <audio controls>
+            <source src="audio/Airlossmajor.mp3" type="audio/mp3">
+        </audio>
+    </td>
+</tr>
+<tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D. Protection Valve
+        <audio controls>
+            <source src="audio/Protection.mp3" type="audio/mp3">
+        </audio>
+    </td>
+    <td>D. No Minor Defect
+		<audio controls>
+            <source src="audio/Nominor.mp3" type="audio/mp3">
+        </audio>
+	</td>
+    <td>D. Inoperative towing vehicle (tractor) protection system.
+        <audio controls>
+            <source src="audio/Protectionmajor.mp3" type="audio/mp3">
+        </audio>
+    </td>
+</tr>
+<tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E. Pushrod
+        <audio controls>
+            <source src="audio/Pushrod.mp3" type="audio/mp3">
+        </audio>
+    </td>
+    <td>E. No Minor Defect.
+		<audio controls>
+            <source src="audio/Nominor.mp3" type="audio/mp3">
+        </audio>
+	</td>
+    <td>
+        E1. Inoperative service, parking or emergency brake.<br>
+		<audio controls>
+            <source src="audio/Pushrodmajor1of2.mp3" type="audio/mp3">
+        </audio>
+        E2. Pushrod stroke of any brake exceeds the adjustment limit.
+        <audio controls>
+            <source src="audio/Pushrodmajor2of2.mp3" type="audio/mp3">
+        </audio>
+    </td>
+</tr>
+          
+
+            
+        </tr>
+        <!-- Additional rows can be added similarly -->
+    </table>
+
+    <p>© 2024 VM Trucking Academy</p>
+</body>
+</html>
