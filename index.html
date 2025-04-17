@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VM Truck Academy</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      text-align: center;
+    }
+
+    header img {
+      margin: 20px auto;
+      display: block;
+      width: 200px;
+      height: auto;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #004080;
+      border-bottom: 2px solid #004080;
+      padding-bottom: 5px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 15px 0;
+    }
+
+    .button-group a img {
+      width: 160px;
+      height: 56px;
+      transition: transform 0.2s ease;
+    }
+
+    .button-group a img:hover {
+      transform: scale(1.05);
+    }
+
+    .download-section img {
+      width: 100px;
+      height: auto;
+      margin: 10px auto;
+      display: block;
+    }
+
+    footer {
+      padding: 20px;
+      background-color: #004080;
+      color: white;
+      font-size: 0.9em;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.2em;
+      }
+
+      .button-group a img {
+        width: 100%;
+        height: auto;
+      }
+
+      .download-section img {
+        width: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <img src="vmlogo.png" alt="VM Truck Academy Logo">
+  </header>
+
+  <section>
+    <h2>I. In-Cab Inspection</h2>
+    <div class="button-group">
+      <a href="incab.html"><img src="button_in-cab-inspections.png" alt="In-Cab Inspections"></a>
+    </div>
+
+    <h2>II. Air-Brake Inspections & Testing Procedures</h2>
+    <div class="button-group">
+      <a href="lowair.html"><img src="button_lowair.png" alt="Low Air"></a>
+      <a href="pressurebuild.html"><img src="button_pressure.png" alt="Pressure Build"></a>
+      <a href="airlossleak.html"><img src="button_airloss.png" alt="Air Loss/Leak"></a>
+      <a href="protectionvalve.html"><img src="button_protectionvalve.png" alt="Protection Valve"></a>
+      <a href="pushrod.html"><img src="button_pushrod.png" alt="Push Rod"></a>
+    </div>
+
+    <h2>III. Schedule 1</h2>
+    <div class="button-group">
+      <a href="schedule1.html"><img src="button_schedule.png" alt="schedule1"></a>
+    </div>
+
+    <div class="download-section">
+      <p>Click below to download Schedule 1:</p>
+      <a href="/files/SCHEDULE1VM2025.pdf" download>
+        <img src="sch1.jpg" alt="Download Schedule 1">
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 VM Truck Academy
+  </footer>
+
+</body>
+</html>
