@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VM TRUCK ACADEMY - Push-Rod Inspection</title>
+
+  <!-- Animate on scroll (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      transition: background-color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      background: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.8em;
+      color: #004080;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 10px auto;
+      display: block;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 20px 0;
+      background: #f9f9f9;
+      padding: 15px;
+      border-left: 4px solid #004080;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    li:hover {
+      background: #e8f0ff;
+    }
+
+    li strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    i {
+      color: #555;
+    }
+
+    a {
+      color: #004080;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .download-btn {
+      display: inline-block;
+      margin: 20px auto;
+      padding: 12px 20px;
+      background-color: #004080;
+      color: white;
+      text-align: center;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background-color: #003366;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="pdfContent">
+    <img src="image/vmlogo.png" alt="VM Truck Academy Logo" width="225" height="56">
+    <h1 class="animate__animated animate__fadeInDown">Push-Rod Inspection Procedure</h1>
+
+    <ul>
+      <li><strong>1. Enter Cab</strong><i>"The wheels are chocked, both parking brakes are applied, My truck & trailer secure"</i><audio controls><source src="Incab01.mp3"></audio></li>
+
+      <li><strong>2. Start Engine & Ask Examiner</strong>
+        <br>– Release both parking brakes
+        <br>– Pull hood latch
+        <br>– Ask examiner which side to inspect
+        <br>– Turn steering wheel accordingly
+      </li>
+
+      <li><strong>3. Turn Off Engine, Ignition ON (90–100 PSI)</strong>
+        <i>"My current pressure is ____psi"</i>
+        <audio controls><source src="Push02.mp3"></audio>
+      </li>
+
+      <li><strong>4. Exit Truck & Open Hood</strong></li>
+
+      <li><strong>5. Inspect Brake Chamber</strong>
+        <i>"This brake chamber has a circular connection port..."</i>
+        <audio controls><source src="Push03.mp3"></audio>
+        <br><img src="st.jpg" alt="Standard Stroke">
+        <br><img src="ls.jpg" alt="Long Stroke">
+        <br><img src="tag.jpg" alt="Plastic Tag">
+      </li>
+
+      <li><strong>6. Measure Brake Chamber Size & Adjustment Limit</strong>
+        <i>"My Brake-chamber tool reads: 20 ... Adjustment limit is 1.75\""</i>
+        <audio controls><source src="Push04.mp3"></audio>
+        <br><img src="braketool.jpg" alt="Brake Tool 1">
+        <br><img src="braketool2.png" alt="Brake Tool 2">
+        <br><img src="chart.jpg" alt="Adjustment Chart">
+      </li>
+
+      <li><strong>7. If Disc Brakes, Say:</strong>
+        <i>"My truck has disc brakes, I will continue verbally."</i>
+        <audio controls><source src="Push05.mp3"></audio>
+      </li>
+
+      <li><strong>8. Mark the Push-Rod</strong>
+        <i>"I will mark the push rod at the base of the brake chamber with chalk"</i>
+        <audio controls><source src="Push06.mp3"></audio>
+        <br><img src="mark.jpg" alt="Mark Pushrod">
+      </li>
+
+      <li><strong>9. Re-Enter Truck & Apply Brake-Buddy</strong>
+        <i>"I will fully apply my service brake with the brake buddy"</i>
+        <audio controls><source src="Push07.mp3"></audio>
+        <br><img src="brakeb.jpg" alt="Brake Buddy">
+      </li>
+
+      <li><strong>10. Exit Truck & Measure Push-Rod Movement</strong>
+        <i>"I will measure how far the mark moved from the base"</i>
+        <audio controls><source src="Push08.mp3"></audio>
+        <br><img src="measure.jpg" alt="Measurement">
+      </li>
+
+      <li><strong>11. Read Push-Rod Measurement</strong>
+        <i>"My push-rod moved 1\" ... within adjustment limit"</i>
+        <audio controls><source src="Push09.mp3"></audio>
+      </li>
+
+      <li><strong>12. Remove Brake-Buddy & Apply Parking Brakes</strong></li>
+      <li><strong>13. Read Minor & Major Defects</strong></li>
+    </ul>
+
+    <p>To see video of Push-Rod Inspection Procedure: 
+      <a href="https://youtu.be/qrLOIjHTp7E?feature=shared" target="_blank">Press Here!</a>
+    </p>
+
+    <p>
+      <a href="index.html">
+        <img src="image/button_home.png" alt="Back to Home" style="width:156px;height:56px;">
+      </a>
+    </p>
+
+    <div class="download-btn" onclick="downloadPDF()">Download This Page as PDF</div>
+  </div>
+
+  <footer>
+    © 2025 VM Truck Academy
+  </footer>
+
+  <!-- html2pdf.js library -->
+  <script src="https://rawcdn.githack.com/eKoopmans/html2pdf/0.10.1/dist/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('pdfContent');
+      const opt = {
+        margin: 0.5,
+        filename: 'PushRodInspection_VMTruckAcademy.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+
+</body>
+</html>
