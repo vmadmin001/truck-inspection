@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Class Selection</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init(fbdsl0MoxIyWq9aXU); // <<--- Replace this
+    })();
+  </script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f2f5fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      max-width: 180px;
+      height: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #003D7A;
+      margin-bottom: 20px;
+    }
+
+    .day {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #003D7A;
+    }
+
+    select, input {
+      padding: 10px;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 12px 20px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4A90E2;
+      color: white;
+      margin-top: 10px;
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+    }
+
+    #resetButton {
+      background-color: #dc3545;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    #counter {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #003D7A;
+    }
+
+    #class-preview {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    #notice {
+      color: darkorange;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="logo">
+    <img src="/mnt/data/aVmbg_1.jpg" alt="Logo">
+  </div>
+
+  <h1>Choose Your 2-Hour Classes (Max 4 Days)</h1>
+
+  <div id="notice">Please complete your name and phone number to select classes.</div>
+
+  <form id="timeForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="text" id="phone" name="phone" placeholder="Your Phone Number" required>
+
+    <div id="day-selectors"></div>
+
+    <div id="counter">0 / 4 days selected</div>
+
+    <div id="class-preview">
+      <h3>Selected Classes:</h3>
+      <ul id="preview-list"></ul>
+    </div>
+
+    <button type="submit">Submit</button>
+    <button type="button" id="resetButton">Reset</button>
+
+    <p id="error" class="error"></p>
+  </form>
+</div>
+
+<script>
+  const daysOfWeek = [
+    { day: "Monday", type: "weekday" },
+    { day: "Tuesday", type: "weekday" },
+    { day: "Wednesday", type: "weekday" },
+    { day: "Thursday", type: "weekday" },
+    { day: "Friday", type: "weekday" },
+    { day: "Saturday", type: "weekend" },
+    { day: "Sunday", type: "weekend" },
+  ];
+
+  const weekdayStartTimes = generateTimes(9, 30, 16, 0);
+  const weekendStartTimes = generateTimes(10, 0, 12, 0);
+
+  const maxDays = 4;
+  let selections = {};
+
+  const daySelectors = document.getElementById('day-selectors');
+  const errorText = document.getElementById('error');
+  const counterText = document.getElementById('counter');
+  const resetButton = document.getElementById('resetButton');
+  const previewList = document.getElementById('preview-list');
+  const notice = document.getElementById('notice');
+
+  function generateTimes(startHour, startMinute, endHour, endMinute) {
+    const times = [];
+    let current = new Date();
+    current.setHours(startHour, startMinute, 0, 0);
+
+    const end = new Date();
+    end.setHours(endHour, endMinute, 0, 0);
+
+    while (current <= end) {
+      const hours = current.getHours();
+      const minutes = current.getMinutes();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const hour12 = hours % 12 || 12;
+      const minuteStr = minutes.toString().padStart(2, '0');
+      times.push(`${hour12}:${minuteStr} ${ampm}`);
+      current.setMinutes(current.getMinutes() + 30);
+    }
+    return times;
+  }
+
+  function renderSelectors() {
+    daySelectors.innerHTML = '';
+    daysOfWeek.forEach(({ day, type }) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'day';
+      wrapper.innerHTML = `
+        <label>${day}</label>
+        <select id="${day}" disabled>
+          <option value="">Select Start Time</option>
+          ${(type === "weekday" ? weekdayStartTimes : weekendStartTimes).map(time => `
+            <option value="${time}">${time}</option>
+          `).join('')}
+        </select>
+      `;
+      daySelectors.appendChild(wrapper);
+
+      const select = document.getElementById(day);
+
+      select.addEventListener('focus', (e) => {
+        if (!canSelect()) {
+          errorText.textContent = "Please enter your name and phone number first.";
+          setTimeout(() => { errorText.textContent = ""; }, 3000);
+          e.target.blur();
+        }
+      });
+
+      select.addEventListener('change', (e) => {
+        if (e.target.value) {
+          selections[day] = e.target.value;
+        } else {
+          delete selections[day];
+        }
+        controlDropdowns();
+        updatePreview();
+      });
+    });
+  }
+
+  function controlDropdowns() {
+    const selectedCount = Object.keys(selections).length;
+
+    daysOfWeek.forEach(({ day }) => {
+      const dropdown = document.getElementById(day);
+      dropdown.disabled = selectedCount >= maxDays || !canSelect();
+    });
+
+    counterText.textContent = `${selectedCount} / ${maxDays} days selected`;
+
+    if (selectedCount > maxDays) {
+      errorText.textContent = `You can only select up to ${maxDays} days.`;
+    } else {
+      errorText.textContent = "";
+    }
+
+    notice.style.display = canSelect() ? "none" : "block";
+  }
+
+  function canSelect() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    return name !== '' && phone !== '';
+  }
+
+  function updatePreview() {
+    previewList.innerHTML = '';
+    for (const [day, startTime] of Object.entries(selections)) {
+      const endTime = calculateEndTime(startTime);
+      const listItem = document.createElement('li');
+      listItem.textContent = `${day}: ${startTime} - ${endTime}`;
+      previewList.appendChild(listItem);
+    }
+  }
+
+  function calculateEndTime(startTime) {
+    const [time, modifier] = startTime.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+
+    if (modifier === "PM" && hours !== 12) {
+      hours += 12;
+    } else if (modifier === "AM" && hours === 12) {
+      hours = 0;
+    }
+
+    const startDate = new Date();
+    startDate.setHours(hours, minutes, 0, 0);
+    startDate.setHours(startDate.getHours() + 2);
+
+    let endHours = startDate.getHours();
+    let endMinutes = startDate.getMinutes();
+    const endModifier = endHours >= 12 ? "PM" : "AM";
+    return `${endHours % 12 || 12}:${endMinutes.toString().padStart(2, '0')} ${endModifier}`;
+  }
+
+  renderSelectors();
+
+  document.getElementById('name').addEventListener('input', controlDropdowns);
+  document.getElementById('phone').addEventListener('input', controlDropdowns);
+
+  resetButton.addEventListener('click', () => {
+    selections = {};
+    document.getElementById('timeForm').reset();
+    renderSelectors();
+    controlDropdowns();
+    updatePreview();
+  });
+
+  document.getElementById('timeForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (Object.keys(selections).length === 0) {
+      document.getElementById('error').textContent = "Please select at least one class.";
+      return;
+    }
+
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    let classes = '';
+    for (const [day, time] of Object.entries(selections)) {
+      const endTime = calculateEndTime(time);
+      classes += `${day}: ${time} - ${endTime}\n`;
+    }
+
+    const templateParams = {
+      name: name,
+      phone: phone,
+      classes: classes,
+    };
+
+    emailjs.send(Service_2vmzadt,template_uvkvmnw, templateParams)
+      .then(function(response) {
+        alert('Class selection sent successfully!');
+        location.reload();
+      }, function(error) {
+        alert('FAILED to send. Please try again later.');
+        console.log(error);
+      });
+  });
+</script>
+
+</body>
+</html>
