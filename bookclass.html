@@ -6,7 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
   <script>
     (function(){
-      emailjs.init(fbdsl0MoxIyWq9aXU); // <<--- Replace this
+      emailjs.init("fbdsl0MoxIyWq9aXU"); // <-- Your actual API Key
     })();
   </script>
   <style>
@@ -16,7 +16,6 @@
       margin: 0;
       padding: 20px;
     }
-
     .container {
       max-width: 700px;
       margin: auto;
@@ -25,32 +24,26 @@
       border-radius: 15px;
       box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     }
-
     .logo {
       text-align: center;
       margin-bottom: 20px;
     }
-
     .logo img {
       max-width: 180px;
       height: auto;
     }
-
     h1 {
       text-align: center;
       color: #003D7A;
       margin-bottom: 20px;
     }
-
     .day {
       margin-bottom: 20px;
     }
-
     label {
       font-weight: bold;
       color: #003D7A;
     }
-
     select, input {
       padding: 10px;
       width: 100%;
@@ -59,7 +52,6 @@
       border: 1px solid #ccc;
       border-radius: 8px;
     }
-
     button {
       padding: 12px 20px;
       width: 100%;
@@ -71,29 +63,24 @@
       color: white;
       margin-top: 10px;
     }
-
     button:disabled {
       background-color: #cccccc;
     }
-
     #resetButton {
       background-color: #dc3545;
       margin-top: 10px;
     }
-
     .error {
       color: red;
       text-align: center;
       font-weight: bold;
     }
-
     #counter {
       text-align: center;
       margin-top: 10px;
       font-weight: bold;
       color: #003D7A;
     }
-
     #class-preview {
       background-color: #f9f9f9;
       border: 1px solid #ddd;
@@ -101,7 +88,6 @@
       border-radius: 10px;
       margin-top: 20px;
     }
-
     #notice {
       color: darkorange;
       font-weight: bold;
@@ -251,12 +237,36 @@
     return name !== '' && phone !== '';
   }
 
+  function getNextDateOfWeek(dayName) {
+    const daysMap = {
+      Sunday: 0,
+      Monday: 1,
+      Tuesday: 2,
+      Wednesday: 3,
+      Thursday: 4,
+      Friday: 5,
+      Saturday: 6
+    };
+    const today = new Date();
+    const todayDay = today.getDay();
+    const targetDay = daysMap[dayName];
+    let delta = targetDay - todayDay;
+    if (delta < 0) delta += 7;
+
+    const nextDate = new Date(today);
+    nextDate.setDate(today.getDate() + delta);
+
+    const options = { month: 'long', day: 'numeric' };
+    return nextDate.toLocaleDateString('en-US', options);
+  }
+
   function updatePreview() {
     previewList.innerHTML = '';
     for (const [day, startTime] of Object.entries(selections)) {
+      const fullDate = getNextDateOfWeek(day);
       const endTime = calculateEndTime(startTime);
       const listItem = document.createElement('li');
-      listItem.textContent = `${day}: ${startTime} - ${endTime}`;
+      listItem.textContent = `${day}, ${fullDate}: ${startTime} - ${endTime}`;
       previewList.appendChild(listItem);
     }
   }
@@ -307,8 +317,9 @@
 
     let classes = '';
     for (const [day, time] of Object.entries(selections)) {
+      const fullDate = getNextDateOfWeek(day);
       const endTime = calculateEndTime(time);
-      classes += `${day}: ${time} - ${endTime}\n`;
+      classes += `${day}, ${fullDate}: ${time} - ${endTime}\n`;
     }
 
     const templateParams = {
@@ -317,10 +328,17 @@
       classes: classes,
     };
 
-    emailjs.send(Service_2vmzadt,template_uvkvmnw, templateParams)
+    emailjs.send('service_2vmzadt', 'template_uvkvmnw', templateParams)
       .then(function(response) {
-        alert('Class selection sent successfully!');
-        location.reload();
+        document.querySelector('.container').innerHTML = `
+          <div class="logo">
+            <img src="/mnt/data/aVmbg_1.jpg" alt="Logo">
+          </div>
+          <h1>Class selection received</h1>
+          <p style="text-align: center; font-size: 18px; color: #003D7A;">
+            We will message you with confirmation.
+          </p>
+        `;
       }, function(error) {
         alert('FAILED to send. Please try again later.');
         console.log(error);
