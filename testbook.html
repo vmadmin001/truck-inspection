@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Class Selection</title>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
     form { max-width: 500px; margin: auto; }
@@ -23,15 +22,19 @@
 
   <h2>Select Your Classes</h2>
 
-  <form id="classForm">
+  <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST" id="classForm">
+    <!-- To prevent spam bots -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://vmadmin001.github.io/truck-inspection/thankyou.html">
+
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required />
+    <input type="text" id="name" name="Name" required />
 
     <label for="phone">Phone Number:</label>
-    <input type="text" id="phone" name="phone" required />
+    <input type="text" id="phone" name="Phone" required />
 
     <label for="classes">Select up to 4 Classes:</label>
-    <select id="classes" name="classes" multiple size="10" required>
+    <select id="classes" name="Classes" multiple size="10" required>
       <optgroup label="Monday to Friday (9:30am - 6pm)">
         <option>Monday 9:30am</option>
         <option>Monday 11:30am</option>
@@ -65,41 +68,5 @@
     <button type="submit">Submit</button>
   </form>
 
-  <script>
-    (function () {
-      emailjs.init("fbdsl0MoxIyWq9aXU");
-    })();
-
-    document.getElementById("classForm").addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-      const selectedOptions = Array.from(document.getElementById("classes").selectedOptions).map(
-        (option) => option.value
-      );
-
-      if (selectedOptions.length > 4) {
-        alert("Please select a maximum of 4 classes.");
-        return;
-      }
-
-      emailjs.send("service_2vmzadt", "template_test_form", {
-        name: name,
-        phone: phone,
-        classes: selectedOptions.join(", "),
-      })
-      .then(
-        function (response) {
-          alert("Class selection received, we will message with confirmation.");
-          document.getElementById("classForm").reset();
-        },
-        function (error) {
-          alert("Failed to send. Please try again later.");
-          console.error("EmailJS Error:", error);
-        }
-      );
-    });
-  </script>
 </body>
 </html>
