@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Class Selection</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+    form { max-width: 500px; margin: auto; }
+    label { display: block; margin-top: 15px; text-align: left; }
+    input, select { width: 100%; padding: 10px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+    img { max-width: 150px; margin-bottom: 20px; }
+    #home-button { position: absolute; top: 20px; left: 20px; padding: 10px; }
+  </style>
+</head>
+<body>
+
+  <a href="/" id="home-button">Home</a>
+
+  <img src="your_logo_here.jpg" alt="Logo"/>
+
+  <h2>Select Your Classes</h2>
+
+  <form id="classForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="phone" required />
+
+    <label for="classes">Select up to 4 Classes:</label>
+    <select id="classes" name="classes" multiple size="10" required>
+      <optgroup label="Monday to Friday (9:30am - 6pm)">
+        <option>Monday 9:30am</option>
+        <option>Monday 11:30am</option>
+        <option>Monday 1:30pm</option>
+        <option>Monday 3:30pm</option>
+        <option>Tuesday 9:30am</option>
+        <option>Tuesday 11:30am</option>
+        <option>Tuesday 1:30pm</option>
+        <option>Tuesday 3:30pm</option>
+        <option>Wednesday 9:30am</option>
+        <option>Wednesday 11:30am</option>
+        <option>Wednesday 1:30pm</option>
+        <option>Wednesday 3:30pm</option>
+        <option>Thursday 9:30am</option>
+        <option>Thursday 11:30am</option>
+        <option>Thursday 1:30pm</option>
+        <option>Thursday 3:30pm</option>
+        <option>Friday 9:30am</option>
+        <option>Friday 11:30am</option>
+        <option>Friday 1:30pm</option>
+        <option>Friday 3:30pm</option>
+      </optgroup>
+      <optgroup label="Saturday & Sunday (10am - 2pm)">
+        <option>Saturday 10:00am</option>
+        <option>Saturday 12:00pm</option>
+        <option>Sunday 10:00am</option>
+        <option>Sunday 12:00pm</option>
+      </optgroup>
+    </select>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    (function () {
+      emailjs.init("fbdsl0MoxIyWq9aXU");
+    })();
+
+    document.getElementById("classForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const selectedOptions = Array.from(document.getElementById("classes").selectedOptions).map(
+        (option) => option.value
+      );
+
+      if (selectedOptions.length > 4) {
+        alert("Please select a maximum of 4 classes.");
+        return;
+      }
+
+      emailjs.send("service_2vmzadt", "template_test_form", {
+        name: name,
+        phone: phone,
+        classes: selectedOptions.join(", "),
+      })
+      .then(
+        function (response) {
+          alert("Class selection received, we will message with confirmation.");
+          document.getElementById("classForm").reset();
+        },
+        function (error) {
+          alert("Failed to send. Please try again later.");
+          console.error("EmailJS Error:", error);
+        }
+      );
+    });
+  </script>
+</body>
+</html>
